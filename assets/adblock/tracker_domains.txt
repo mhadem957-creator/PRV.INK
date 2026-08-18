@@ -1,0 +1,105 @@
+# INK Tracker Blocklist — analytics, fingerprinting, beacons.
+# One host (or host fragment) per line. Human-auditable.
+
+# Google Analytics & Tag Manager
+google-analytics.com
+googletagmanager.com
+ssl.google-analytics.com
+www.google-analytics.com
+analytics.google.com
+region1.google-analytics.com
+stats.g.doubleclick.net
+www.googletagmanager.com
+
+# Major analytics platforms
+scorecardresearch.com
+quantserve.com
+chartbeat.com
+hotjar.com
+mixpanel.com
+segment.io
+segment.com
+amplitude.com
+mouseflow.com
+crazyegg.com
+fullstory.com
+heap.io
+heapanalytics.com
+kissmetrics.com
+clicktale.net
+luckyorange.com
+inspectlet.com
+sessioncam.com
+smartlook.com
+clarity.ms
+microsoft.com/clarity
+
+# Mobile attribution & SDKs
+appsflyer.com
+branch.io
+flurry.com
+adjust.com
+kochava.com
+singular.net
+tenjin.io
+airbridge.io
+
+# Data brokers / DMP
+tapad.com
+bluekai.com
+exelator.com
+demdex.net
+everesttech.net
+krxd.net
+agkn.com
+rlcdn.com
+crwdcntrl.net
+mathtag.com
+adsrvr.org
+bidswitch.net
+turn.com
+adsymptotic.com
+eyeota.net
+lotame.com
+liveramp.com
+id5-sync.com
+sharedid.org
+pubcid.org
+
+# Fingerprinting / anti-fraud (often used for tracking)
+newrelic.com
+nr-data.net
+sentry.io
+bugsnag.com
+rollbar.com
+loggly.com
+datadoghq.com
+perimeterx.net
+px-cdn.net
+px-client.net
+distilnetworks.com
+kaspersky-labs.com
+threatmetrix.com
+iovation.com
+devicefingerprint.com
+
+# Social trackers
+connect.facebook.net
+facebook.com/tr
+pixel.facebook.com
+analytics.twitter.com
+static.ads-twitter.com
+ads-api.twitter.com
+snap.licdn.com
+px.ads.linkedin.com
+ads.linkedin.com
+platform.linkedin.com
+sc-static.net
+tr.snapchat.com
+bat.bing.com
+bing.com/bat
+yandex.ru/metrika
+mc.yandex.ru
+vk.com/rtrg
+
+# Other common beacons
