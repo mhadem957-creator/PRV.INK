@@ -1,0 +1,107 @@
+# INK Ad Blocklist — curated, human-auditable.
+# One host (or host fragment) per line. Lines starting with # are ignored.
+# Designed to stop the majority of commercial ads without breaking sites.
+
+# Google Ads ecosystem
+doubleclick.net
+googlesyndication.com
+googleadservices.com
+adservice.google.com
+googletagservices.com
+pagead2.googlesyndication.com
+tpc.googlesyndication.com
+partner.googleadservices.com
+ads.google.com
+ad.google.com
+
+# Major ad exchanges & SSPs
+adnxs.com
+adsrvr.org
+adroll.com
+taboola.com
+outbrain.com
+criteo.com
+criteo.net
+amazon-adsystem.com
+media.net
+pubmatic.com
+rubiconproject.com
+openx.net
+casalemedia.com
+contextweb.com
+bidswitch.net
+mathtag.com
+adform.net
+smartadserver.com
+yieldmo.com
+sharethrough.com
+indexexchange.com
+spotxchange.com
+teads.tv
+advertising.com
+zedo.com
+lijit.com
+sovrn.com
+33across.com
+triplelift.com
+yieldlab.net
+smartclip.net
+adagio.io
+onetag.com
+gumgum.com
+sonobi.com
+medianet.com
+rhythmone.com
+pulsepoint.com
+conversantmedia.com
+districtm.io
+emxdgt.com
+bidr.io
+1rx.io
+aaxads.com
+
+# Mobile / in-app ad networks
+adcolony.com
+vungle.com
+applovin.com
+unityads.unity3d.com
+chartboost.com
+ironsrc.com
+mopub.com
+inmobi.com
+startapp.com
+smaato.com
+fyber.com
+tapjoy.com
+supersonicads.com
+mintegral.com
+pangle.io
+tiktokv.com
+bytedance.com
+ads.linkedin.com
+ads.twitter.com
+ads.yahoo.com
+ads.bing.com
+ads.facebook.com
+an.facebook.com
+
+# Native / content recommendation
+revcontent.com
+mgid.com
+content.ad
+zergnet.com
+disqus.com
+viralcontentnetwork.com
+
+# Video ads
+spotx.tv
+springserve.com
+freewheel.tv
+stickyadstv.com
+jwpltx.com
+
+# Regional / other
+adsafeprotected.com
+moatads.com
+adsystem.com
+adtechus.com

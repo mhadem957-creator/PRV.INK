@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>INK</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Noto+Sans+JP:wght@700;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #121212;
+      --paper: #F6F5F0;
+      --crimson: #E60012;
+      --muted: #8a8680;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 14px 24px;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -25deg,
+          transparent,
+          transparent 18px,
+          rgba(18,18,18,0.035) 18px,
+          rgba(18,18,18,0.035) 19px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(18,18,18,0.04) 0.6px, transparent 0.6px);
+      background-size: 4px 4px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 4px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--ink);
+      padding: 28px 18px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .panel::before,
+    .panel::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--crimson);
+      border: 2.5px solid var(--ink);
+    }
+    .panel::before { top: -8px; left: -8px; }
+    .panel::after { bottom: -8px; right: -8px; }
+
+    .seal {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 12px;
+      border: 4px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transform: rotate(-3deg);
+    }
+    .seal .kanji {
+      font-size: 46px;
+      font-weight: 900;
+      color: var(--paper);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .seal .spark {
+      position: absolute;
+      top: -12px;
+      right: -14px;
+      font-size: 22px;
+      filter: drop-shadow(2px 2px 0 var(--ink));
+    }
+
+    .title {
+      font-family: "Black Ops One", "Noto Sans JP", sans-serif;
+      font-size: 48px;
+      letter-spacing: 8px;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .subtitle {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 3.5px;
+      color: var(--crimson);
+      margin-bottom: 20px;
+    }
+
+    .search-box {
+      display: flex;
+      width: 100%;
+      border: 3.5px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      background: #fff;
+      position: relative;
+    }
+    .search-box::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      bottom: -14px;
+      width: 16px;
+      height: 14px;
+      background: #fff;
+      border-right: 3.5px solid var(--ink);
+      border-bottom: 3.5px solid var(--ink);
+      transform: skewX(-35deg);
+      z-index: 0;
+    }
+    input[type="search"] {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px 12px 14px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      font-weight: 700;
+      background: transparent;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+    input[type="search"]::placeholder {
+      color: #aaa;
+      font-weight: 700;
+    }
+    .go {
+      border: none;
+      background: #E60012;
+      color: #fff;
+      font-family: "Black Ops One", sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      padding: 0 18px;
+      cursor: pointer;
+      border-left: 3.5px solid var(--ink);
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+      min-width: 56px;
+    }
+    .go:active { filter: brightness(0.9); }
+
+    .stickers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 26px;
+    }
+    .sticker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 11px 8px;
+      background: #fff;
+      border: 3px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      transition: transform 0.08s ease;
+    }
+    .sticker:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+    .sticker .ico { font-size: 15px; }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 10px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 2.5px dashed rgba(18,18,18,0.2);
+    }
+    .feat {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .feat span {
+      color: var(--crimson);
+      font-size: 12px;
+    }
+
+    .footer {
+      margin-top: 16px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.5px;
+      color: var(--ink);
+      opacity: 0.55;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #F0EDE6;
+        --paper: #161616;
+        --muted: #9a9590;
+      }
+      body { background: #161616; }
+      .panel { background: #1c1c1c; }
+      .search-box, .sticker { background: #242424; }
+      .search-box::before { background: #242424; }
+      input[type="search"] { color: #F0EDE6; }
+      input[type="search"]::placeholder { color: #666; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <div class="seal">
+        <div class="kanji">墨</div>
+        <span class="spark">✦</span>
+      </div>
+      <div class="title">INK</div>
+      <div class="subtitle">PRIVATE · FAST · YOURS</div>
+
+      <form id="f" action="https://searx.be/search" method="get" accept-charset="utf-8">
+        <input type="hidden" name="categories" value="general">
+        <input type="hidden" name="language" value="auto">
+        <input type="hidden" name="safesearch" value="0">
+        <input type="hidden" name="engines" value="google,duckduckgo,brave,wikipedia,wikidata,bing">
+        <div class="search-box">
+          <input type="search" name="q" placeholder="Search privately…" autofocus autocomplete="off" enterkeyhint="search">
+          <button class="go" type="submit">GO</button>
+        </div>
+      </form>
+
+      <div class="stickers">
+        <a class="sticker" href="https://en.wikipedia.org"><span class="ico">📖</span> WIKI</a>
+        <a class="sticker" href="https://github.com"><span class="ico">⚡</span> GITHUB</a>
+        <a class="sticker" href="https://news.ycombinator.com"><span class="ico">🔥</span> NEWS</a>
+        <a class="sticker" href="https://reddit.com"><span class="ico">💬</span> REDDIT</a>
+      </div>
+
+      <div class="features">
+        <div class="feat"><span>●</span> NO TRACKERS</div>
+        <div class="feat"><span>●</span> NO ADS</div>
+        <div class="feat"><span>●</span> SEARXNG</div>
+        <div class="feat"><span>●</span> DOH READY</div>
+      </div>
+
+      <div class="footer">INK BROWSER · YOU OWN THE PAGE</div>
+    </div>
+  </div>
+</body>
+</html>

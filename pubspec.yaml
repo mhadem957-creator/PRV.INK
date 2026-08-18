@@ -1,0 +1,67 @@
+name: ink
+description: "INK — The private browser that puts you first. Zero tracking, SearXNG search, powerful ad & tracker blocking, manga-ink design. Better privacy than Google by design."
+publish_to: 'none'
+version: 2.0.0+4
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Core WebView engine
+  flutter_inappwebview: ^6.1.5
+
+  # State management for app-wide settings
+  provider: ^6.1.2
+
+  # Persists user settings across launches
+  shared_preferences: ^2.3.3
+
+  # Used by DnsService for DNS-over-HTTPS (DoH) lookups
+  http: ^1.2.2
+
+  # Deep-links to Android's system "Private DNS" settings screen
+  android_intent_plus: ^5.1.0
+
+  # Background downloads with system notifications, pause/resume
+  flutter_downloader: ^1.11.8
+
+  # Runtime permissions (storage, install packages, etc.)
+  permission_handler: ^11.3.1
+
+  # Open downloaded files / trigger APK installer
+  open_filex: ^4.5.0
+
+  # Path helpers for download directories
+  path_provider: ^2.1.4
+
+  # Background audio playback (for downloaded music)
+  just_audio: ^0.9.40
+  audio_service: ^0.18.15
+
+  # Optional biometric app lock
+  local_auth: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: assets/branding/app_icon_1024.png
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: assets/branding/app_icon_1024.png
+  min_sdk_android: 24
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/adblock/
+    - assets/test/
+    - assets/start/
+    - assets/branding/

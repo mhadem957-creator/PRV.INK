@@ -1,0 +1,11 @@
+Privacy Browser – Sample Download File
+======================================
+
+This is a test file you can use to verify the Media Sniffer
+and Download Manager in Privacy Browser.
+
+File type: .txt (Documents category)
+Created for testing background downloads, progress notifications,
+and the Downloads screen.
+
+Manga / Inked Aesthetics edition.
