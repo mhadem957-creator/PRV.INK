@@ -1,0 +1,78 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: {}
+
+env:
+  FLUTTER_VERSION: "3.24.5"
+
+jobs:
+  build:
+    name: Build release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            \~/.gradle/caches
+            \~/.gradle/wrapper
+          key: gradle-\( {{ runner.os }}- \){{ env.FLUTTER_VERSION }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
+
+      # This repo doesn't commit the android/ platform folder (it contains a
+      # binary Gradle wrapper jar) — generate it fresh against whatever
+      # Flutter SDK version this workflow installed, then patch it.
+      - name: Scaffold Android platform folder
+        run: flutter create --platforms=android --org com.ink.browser --project-name ink .
+
+      - name: Patch AndroidManifest + compileSdk 35
+        run: python3 scripts/patch_manifest.py
+
+      - name: Ensure Android SDK 35 is installed
+        run: |
+          sdkmanager --install "platforms;android-35" "build-tools;35.0.0" || true
+          yes | sdkmanager --licenses || true
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Generate launcher icons
+        run: dart run flutter_launcher_icons
+
+      - name: Static analysis (non-blocking)
+        run: flutter analyze || true
+
+      - name: Run unit tests (non-blocking)
+        run: flutter test || true
+
+      - name: Build release APK (per-ABI)
+        run: flutter build apk --release --split-per-abi
+
+      - name: Upload APK artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ink-apk-${{ github.run_number }}
+          path: build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
+          retention-days: 30
