@@ -5,25 +5,22 @@ import 'package:provider/provider.dart';
 
 import 'models/browser_settings.dart';
 import 'screens/browser_screen.dart';
-import 'theme/manga_theme.dart';
 import 'services/download_service.dart';
+import 'theme/manga_theme.dart';
 import 'utils/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Must init before runApp so background isolates can attach.
   try {
     await FlutterDownloader.initialize(
       debug: kDebugMode,
       ignoreSsl: true,
     );
-    // Register isolate callback ASAP so progress survives backgrounding.
-    FlutterDownloader.registerCallback(inkDownloaderCallback);
-    await DownloadService.instance.initialize();
   } catch (e) {
-    debugPrint('FlutterDownloader.initialize failed: $e');
+    debugPrint('FlutterDownloader optional init: $e');
   }
+  await DownloadService.instance.initialize();
 
   runApp(const InkApp());
 }
@@ -57,7 +54,6 @@ class _InkAppState extends State<InkApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      // Re-attach download progress port after returning from background.
       DownloadService.instance.rebind();
     }
   }
