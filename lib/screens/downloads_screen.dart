@@ -280,7 +280,7 @@ class _DownloadTile extends StatelessWidget {
               children: [
                 Text(
                   item.status == DownloadTaskStatus.canceled
-                      ? 'CANCELED — grant storage permission & retry'
+                      ? 'CANCELED'
                       : 'FAILED',
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
@@ -289,6 +289,18 @@ class _DownloadTile extends StatelessWidget {
                     letterSpacing: 0.5,
                   ),
                 ),
+                if (item.error != null && item.error!.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    item.error!,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: ink.withOpacity(0.55),
+                    ),
+                  ),
+                ],
               ],
             ),
           const SizedBox(height: 10),
@@ -306,8 +318,10 @@ class _DownloadTile extends StatelessWidget {
                 _actionBtn(context, Icons.open_in_new, 'Open', onOpen),
                 _actionBtn(context, Icons.delete_outline, 'Delete', onRemove),
               ],
-              if (isFailed)
+              if (isFailed) ...[
+                _actionBtn(context, Icons.refresh, 'Retry', onResume),
                 _actionBtn(context, Icons.delete_outline, 'Remove', onRemove),
+              ],
             ],
           ),
         ],
