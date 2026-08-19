@@ -46,6 +46,10 @@ DOWNLOADER_PROVIDER = '''
             android:exported="false"
             tools:node="merge"/>
 
+        <meta-data
+            android:name="vn.hunghd.flutterdownloader.NOTIFICATION_ICON"
+            android:resource="@mipmap/ic_launcher"/>
+
         <receiver
             android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
             android:exported="false"
